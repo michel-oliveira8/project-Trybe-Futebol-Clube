@@ -2,46 +2,52 @@ import { DataTypes, Model } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class Users extends Model {
+class Matchs extends Model {
   public id!: number;
 
-  public username: string;
+  public homeTeam: number;
 
-  public role: string;
+  public homeTeamGoals: number;
 
-  public email: string;
+  public awayTeam: number;
 
-  public password: string;
+  public awayTeamGoals: number;
+
+  public inProgress: number;
 }
 
-Users.init({
+Matchs.init({
   id: {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
     type: DataTypes.INTEGER,
   },
-  username: {
+  homeTeam: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
-  role: {
+  homeTeamGoals: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
-  email: {
+  awayTeam: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
-  password: {
+  awayTeamGoals: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+  },
+  inProgress: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
   },
 }, {
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'Users',
+  modelName: 'Matchs',
   timestamps: false,
 });
 
@@ -56,4 +62,4 @@ Users.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Users;
+export default Matchs;
