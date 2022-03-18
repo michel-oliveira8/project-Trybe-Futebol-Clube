@@ -3,7 +3,7 @@ import db from '.';
 // import OtherModel from './OtherModel';
 
 class Clubs extends Model {
-  public id!: number;
+  public id: number;
 
   public clubName: string;
 }
@@ -15,7 +15,7 @@ Clubs.init({
     autoIncrement: true,
     type: DataTypes.INTEGER,
   },
-  club_name: {
+  clubName: {
     allowNull: false,
     type: DataTypes.STRING,
   },
@@ -23,7 +23,8 @@ Clubs.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'clubs',
+  modelName: 'Clubs',
+  tableName: 'clubs',
   timestamps: false,
 });
 

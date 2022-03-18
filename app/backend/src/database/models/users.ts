@@ -3,7 +3,7 @@ import db from '.';
 // import OtherModel from './OtherModel';
 
 class Users extends Model {
-  public id!: number;
+  public id: number;
 
   public username: string;
 
@@ -41,7 +41,8 @@ Users.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'users',
+  modelName: 'Users',
+  tableName: 'users',
   timestamps: false,
 });
 

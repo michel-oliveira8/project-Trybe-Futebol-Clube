@@ -4,7 +4,7 @@ import Clubs from './clubs';
 // import OtherModel from './OtherModel';
 
 class Matchs extends Model {
-  public id!: number;
+  public id: number;
 
   public homeTeam: number;
 
@@ -50,13 +50,14 @@ Matchs.init({
   },
   in_progress: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.BOOLEAN,
   },
 }, {
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'matchs',
+  modelName: 'Matchs',
+  tableName: 'matchs',
   timestamps: false,
 });
 
@@ -65,10 +66,10 @@ Matchs.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-// OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
+Matchs.belongsTo(Clubs, { foreignKey: 'id' as 'clubs' });
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 
-Matchs.hasMany(Clubs, { foreignKey: 'id' });
+Clubs.hasMany(Matchs, { foreignKey: 'id' as 'matchs' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
 export default Matchs;
