@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
-import Matchs from './matchs';
 // import OtherModel from './OtherModel';
 
 class Clubs extends Model {
@@ -16,7 +15,7 @@ Clubs.init({
     autoIncrement: true,
     type: DataTypes.INTEGER,
   },
-  clubName: {
+  club_name: {
     allowNull: false,
     type: DataTypes.STRING,
   },
@@ -24,7 +23,7 @@ Clubs.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'Clubs',
+  modelName: 'clubs',
   timestamps: false,
 });
 
@@ -33,10 +32,10 @@ Clubs.init({
   * Associations 1:N devem ficar em uma das instâncias de modelo
   * */
 
-Matchs.belongsTo(Clubs, { foreignKey: 'id' });
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 
-Clubs.hasMany(Matchs, { foreignKey: 'id' });
+// OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
+
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
 export default Clubs;
