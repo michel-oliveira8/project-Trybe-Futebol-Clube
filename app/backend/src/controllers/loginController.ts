@@ -1,0 +1,18 @@
+import { Request, Response } from 'express';
+import StatusCode from '../enums/statusCode';
+import loginService from '../services/loginService';
+
+const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const userLogin = await loginService.login(email, password);
+
+  if (userLogin.message) {
+    return res.status(userLogin.code).json({ message: userLogin.message });
+  }
+
+  return res.status(StatusCode.OK).json(userLogin);
+};
+
+export default {
+  login,
+};

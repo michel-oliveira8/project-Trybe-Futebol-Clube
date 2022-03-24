@@ -1,16 +1,14 @@
-export interface Ilogin {
+export interface Login {
   email: string;
   password:string;
 }
 
-export interface TokenPayload {
+export interface Token {
   id: number,
-  username: string,
+  email: string,
 }
 
-export interface User {
-  id: number;
-  username: string,
-  role: string,
-  email: string,
+export interface CodeResponse {
+  code?: number,
+  message?: string,
 }
