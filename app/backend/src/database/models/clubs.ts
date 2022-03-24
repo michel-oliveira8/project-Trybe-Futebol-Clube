@@ -3,9 +3,9 @@ import db from '.';
 // import OtherModel from './OtherModel';
 
 class Clubs extends Model {
-  public id: number;
+  declare id: number;
 
-  public clubName: string;
+  declare clubName: string;
 }
 
 Clubs.init({
