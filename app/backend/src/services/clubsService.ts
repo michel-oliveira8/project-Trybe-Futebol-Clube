@@ -6,6 +6,13 @@ const getAllClubs = async () => {
   return allClubs;
 };
 
+const getById = async (id: number) => {
+  const getClubId = await Clubs.findByPk(id);
+
+  return getClubId;
+};
+
 export default {
   getAllClubs,
+  getById,
 };

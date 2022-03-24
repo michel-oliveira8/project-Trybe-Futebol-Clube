@@ -8,6 +8,14 @@ const getAllClubs = async (_req: Request, res: Response) => {
   res.status(StatusCode.OK).json(result);
 };
 
+const getById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const getClubId = await clubsService.getById(+id);
+
+  return res.status(StatusCode.OK).json(getClubId);
+};
+
 export default {
   getAllClubs,
+  getById,
 };
