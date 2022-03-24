@@ -12,3 +12,10 @@ export interface CodeResponse {
   code?: number,
   message?: string,
 }
+
+export interface EncodeResult {
+  id: number,
+  token: string,
+  expiresIn: number,
+  algorithm: string,
+}

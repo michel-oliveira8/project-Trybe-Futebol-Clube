@@ -1,4 +1,6 @@
+import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
+import { EncodeResult } from '../interfaces/interface';
 import StatusCode from '../enums/statusCode';
 import Users from '../database/models/users';
 import MSG from '../enums/MSG';
@@ -24,6 +26,14 @@ const login = async (userEmail:string, password:string) => {
   return { code: StatusCode.UNAUTHORIZED, message: MSG.INVALID_LOGIN };
 };
 
+const tokenValidate = async (authorization: string) => {
+  const { id } = jwt.decode(authorization) as EncodeResult;
+  const getRole = await Users.findByPk(id);
+
+  return getRole?.role;
+};
+
 export default {
   login,
+  tokenValidate,
 };

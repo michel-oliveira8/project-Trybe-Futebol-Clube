@@ -13,6 +13,17 @@ const login = async (req: Request, res: Response) => {
   return res.status(StatusCode.OK).json(userLogin);
 };
 
+const tokenValidate = async (req: Request, res: Response) => {
+  const { authorization } = req.headers;
+
+  if (authorization) {
+    const isValid = await loginService.tokenValidate(authorization);
+
+    res.status(StatusCode.OK).json(isValid);
+  }
+};
+
 export default {
   login,
+  tokenValidate,
 };
