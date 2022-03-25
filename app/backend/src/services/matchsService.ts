@@ -1,5 +1,8 @@
+import { IMatch } from '../interfaces/interface';
 import Matchs from '../database/models/matchs';
 import Clubs from '../database/models/clubs';
+import StatusCode from '../enums/statusCode';
+import MSG from '../enums/MSG';
 
 const getAllMatchs = async () => {
   const allMatchs = await Matchs.findAll({ include: [
@@ -10,6 +13,25 @@ const getAllMatchs = async () => {
   return allMatchs;
 };
 
+const createMatch = async (match: IMatch) => {
+  const { homeTeam, awayTeam } = match;
+  const verifyClubHome = await Clubs.findOne({ where: { id: homeTeam } });
+  const verifyClubAway = await Clubs.findOne({ where: { id: awayTeam } });
+
+  if (homeTeam === awayTeam) {
+    return { code: StatusCode.UNAUTHORIZED, message: MSG.EQUAL_TEAMS };
+  }
+
+  if (!verifyClubHome || !verifyClubAway) {
+    return { code: StatusCode.UNAUTHORIZED, message: MSG.TEAM_NOT_EXIST };
+  }
+
+  const newMatch = await Matchs.create(match);
+
+  return newMatch as unknown as IMatch;
+};
+
 export default {
   getAllMatchs,
+  createMatch,
 };
