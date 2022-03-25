@@ -31,7 +31,12 @@ const createMatch = async (match: IMatch) => {
   return newMatch as unknown as IMatch;
 };
 
+const updateMatch = async (id : number): Promise<void> => {
+  await Matchs.update({ inProgress: false }, { where: { id } });
+};
+
 export default {
   getAllMatchs,
   createMatch,
+  updateMatch,
 };

@@ -3,6 +3,7 @@ enum MSG {
   FIELDS_NOT_FILLED = 'All fields must be filled',
   EQUAL_TEAMS = 'It is not possible to create a match with two equal teams',
   TEAM_NOT_EXIST = 'There is no team with such id!',
+  MATCH_FINISHED = 'match finished',
 }
 
 export default MSG;

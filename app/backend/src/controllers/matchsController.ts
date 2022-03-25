@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import MSG from '../enums/MSG';
 import StatusCode from '../enums/statusCode';
 import matchsService from '../services/matchsService';
 
@@ -19,7 +20,15 @@ const createMatch = async (req: Request, res: Response) => {
   return res.status(StatusCode.CREATED).json(newMatch);
 };
 
+const updateMatch = async (req:Request, res: Response) => {
+  const { id } = req.params;
+  await matchsService.updateMatch(+id);
+
+  res.status(StatusCode.OK).json({ message: MSG.MATCH_FINISHED });
+};
+
 export default {
   getAllMatchs,
   createMatch,
+  updateMatch,
 };
