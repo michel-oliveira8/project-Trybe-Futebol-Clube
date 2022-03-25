@@ -36,6 +36,9 @@ const updateMatch = async (id : number): Promise<void> => {
 };
 
 const updateMatchInProgress = async (homeTeamGoals: number, awayTeamGoals: number, id:number) => {
+  if (!homeTeamGoals || !awayTeamGoals) {
+    return Matchs.update({ inProgress: false }, { where: { id } });
+  }
   await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: {
     id } });
 };
