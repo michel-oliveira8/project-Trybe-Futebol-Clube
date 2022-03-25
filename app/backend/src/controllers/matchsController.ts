@@ -20,15 +20,24 @@ const createMatch = async (req: Request, res: Response) => {
   return res.status(StatusCode.CREATED).json(newMatch);
 };
 
-const updateMatch = async (req:Request, res: Response) => {
+const updateMatch = async (req: Request, res: Response) => {
   const { id } = req.params;
   await matchsService.updateMatch(+id);
 
-  res.status(StatusCode.OK).json({ message: MSG.MATCH_FINISHED });
+  res.status(StatusCode.OK).json({ message: MSG.FINISHED_MATCH });
+};
+
+const updateMatchInProgress = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { homeTeamGoals, awayTeamGoals } = req.body;
+  await matchsService.updateMatchInProgress(homeTeamGoals, awayTeamGoals, +id);
+
+  res.status(StatusCode.OK).json({ message: MSG.UPDATED_MATCH });
 };
 
 export default {
   getAllMatchs,
   createMatch,
   updateMatch,
+  updateMatchInProgress,
 };

@@ -35,8 +35,14 @@ const updateMatch = async (id : number): Promise<void> => {
   await Matchs.update({ inProgress: false }, { where: { id } });
 };
 
+const updateMatchInProgress = async (homeTeamGoals: number, awayTeamGoals: number, id:number) => {
+  await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: {
+    id } });
+};
+
 export default {
   getAllMatchs,
   createMatch,
   updateMatch,
+  updateMatchInProgress,
 };
