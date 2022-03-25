@@ -16,7 +16,7 @@ const createMatch = async (req: Request, res: Response) => {
     return res.status(newMatch.code).json({ message: newMatch.message });
   }
 
-  return res.status(StatusCode.OK).json(newMatch);
+  return res.status(StatusCode.CREATED).json(newMatch);
 };
 
 export default {
