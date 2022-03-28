@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Testes do endpoint /login', () => {
+describe('Testes do endpoint /login', async () => {
   let chaiHttpResponse: Response;
 
   const userMock = {
