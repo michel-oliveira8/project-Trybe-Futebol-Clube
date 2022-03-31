@@ -29,3 +29,21 @@ export interface IMatch {
   code?: number,
   message?: string,
 }
+
+export interface Ileaderboard {
+  name: string,
+  totalPoints: number,
+  totalGames: number,
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
+  goalsBalance: number,
+  efficiency: number,
+}
+
+export interface Match extends IMatch {
+  homeClub: { clubName: string }
+  awayClub: { clubName: string }
+}
