@@ -5,6 +5,7 @@ import Matchs from '../database/models/matchs';
 const leaderboardClubs: Ileaderboard[] = [];
 
 const leaderboard = (clubs: Clubs[]) => {
+  leaderboardClubs.length = 0;
   clubs.forEach((club) => {
     leaderboardClubs.push({
       name: club.clubName,
