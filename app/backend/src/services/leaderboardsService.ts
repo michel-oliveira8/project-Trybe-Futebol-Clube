@@ -40,7 +40,7 @@ const winHomeClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
   });
 };
 
-const winAwayClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
+const looseHomeClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
   leaderboards.forEach((club) => {
     const team = club;
     matchs.forEach((mt) => {
@@ -56,11 +56,60 @@ const winAwayClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
   });
 };
 
-const drawMatch = (leaderboards: Ileaderboard[], matchs: Match[]) => {
+const drawMatchHomeClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
   leaderboards.forEach((club) => {
     const team = club;
     matchs.forEach((mt) => {
       if (mt.homeClub.clubName === club.name && mt.homeTeamGoals === mt.awayTeamGoals) {
+        team.totalPoints += 1;
+        team.totalGames += 1;
+        team.totalDraws += 1;
+        team.goalsFavor += mt.awayTeamGoals;
+        team.goalsOwn += mt.homeTeamGoals;
+        team.efficiency = +((team.totalPoints / (team.totalGames * 3)) * 100).toFixed(2);
+      }
+    });
+  });
+};
+
+const winAwayClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
+  leaderboards.forEach((club) => {
+    const team = club;
+    matchs.forEach((mt) => {
+      if (mt.awayClub.clubName === club.name && mt.awayTeamGoals > mt.homeTeamGoals) {
+        team.totalPoints += 3;
+        team.totalGames += 1;
+        team.totalVictories += 1;
+        team.goalsFavor += mt.awayTeamGoals;
+        team.goalsOwn += mt.homeTeamGoals;
+        team.goalsBalance += mt.awayTeamGoals - mt.homeTeamGoals;
+        team.efficiency = +((team.totalPoints / (team.totalGames * 3)) * 100).toFixed(2);
+      }
+    });
+  });
+};
+
+const looseAwayClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
+  leaderboards.forEach((club) => {
+    const team = club;
+    matchs.forEach((mt) => {
+      if (mt.awayClub.clubName === club.name && mt.awayTeamGoals < mt.homeTeamGoals) {
+        team.totalGames += 1;
+        team.totalLosses += 1;
+        team.goalsFavor += mt.awayTeamGoals;
+        team.goalsOwn += mt.homeTeamGoals;
+        team.goalsBalance += mt.awayTeamGoals - mt.homeTeamGoals;
+        team.efficiency = +((team.totalPoints / (team.totalGames * 3)) * 100).toFixed(2);
+      }
+    });
+  });
+};
+
+const drawMatchAwayClub = (leaderboards: Ileaderboard[], matchs: Match[]) => {
+  leaderboards.forEach((club) => {
+    const team = club;
+    matchs.forEach((mt) => {
+      if (mt.awayClub.clubName === club.name && mt.homeTeamGoals === mt.awayTeamGoals) {
         team.totalPoints += 1;
         team.totalGames += 1;
         team.totalDraws += 1;
@@ -86,27 +135,45 @@ const orderClassification = (order : Ileaderboard[]) => order.sort((a, b) => {
   return 0;
 });
 
-const allClassification = async () => {
+const allClassificationHomeClub = async () => {
   const matchs = await Matchs.findAll({
     where: { inProgress: false },
     include: [
       { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
-      { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
     ],
   }) as unknown as Match[];
   const clubs = await Clubs.findAll();
   leaderboard(clubs);
   winHomeClub(leaderboardClubs, matchs);
+  looseHomeClub(leaderboardClubs, matchs);
+  drawMatchHomeClub(leaderboardClubs, matchs);
+  return orderClassification(leaderboardClubs);
+};
+
+const allClassificationAwayClub = async () => {
+  const matchs = await Matchs.findAll({
+    where: { inProgress: false },
+    include: [
+      { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
+    ],
+  }) as unknown as Match[];
+  const clubs = await Clubs.findAll();
+  leaderboard(clubs);
   winAwayClub(leaderboardClubs, matchs);
-  drawMatch(leaderboardClubs, matchs);
+  looseAwayClub(leaderboardClubs, matchs);
+  drawMatchAwayClub(leaderboardClubs, matchs);
   return orderClassification(leaderboardClubs);
 };
 
 export default {
   leaderboard,
   winHomeClub,
-  winAwayClub,
-  drawMatch,
+  looseHomeClub,
+  drawMatchHomeClub,
   orderClassification,
-  allClassification,
+  allClassificationHomeClub,
+  winAwayClub,
+  looseAwayClub,
+  drawMatchAwayClub,
+  allClassificationAwayClub,
 };
