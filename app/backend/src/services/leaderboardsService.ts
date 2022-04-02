@@ -165,6 +165,25 @@ const allClassificationAwayClub = async () => {
   return orderClassification(leaderboardClubs);
 };
 
+const allClassification = async () => {
+  const matchs = await Matchs.findAll({
+    where: { inProgress: false },
+    include: [
+      { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
+      { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
+    ],
+  }) as unknown as Match[];
+  const clubs = await Clubs.findAll();
+  leaderboard(clubs);
+  winHomeClub(leaderboardClubs, matchs);
+  looseHomeClub(leaderboardClubs, matchs);
+  drawMatchHomeClub(leaderboardClubs, matchs);
+  winAwayClub(leaderboardClubs, matchs);
+  looseAwayClub(leaderboardClubs, matchs);
+  drawMatchAwayClub(leaderboardClubs, matchs);
+  return orderClassification(leaderboardClubs);
+};
+
 export default {
   leaderboard,
   winHomeClub,
@@ -176,4 +195,5 @@ export default {
   looseAwayClub,
   drawMatchAwayClub,
   allClassificationAwayClub,
+  allClassification,
 };

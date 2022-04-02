@@ -14,7 +14,14 @@ const allClassificationAwayClub = async (_req: Request, res: Response) => {
   res.status(StatusCode.OK).json(result);
 };
 
+const allClassification = async (_req: Request, res: Response) => {
+  const result = await leaderboardsService.allClassification();
+
+  res.status(StatusCode.OK).json(result);
+};
+
 export default {
   allClassificationHomeClub,
   allClassificationAwayClub,
+  allClassification,
 };

@@ -7,4 +7,6 @@ leaderboardRouter.get('/leaderboard/home', leaderboardsController.allClassificat
 
 leaderboardRouter.get('/leaderboard/away', leaderboardsController.allClassificationAwayClub);
 
+leaderboardRouter.get('/leaderboard', leaderboardsController.allClassification);
+
 export default leaderboardRouter;
