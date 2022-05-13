@@ -34,6 +34,9 @@ Para adicionar uma partida é necessário usuário e senha, portanto a pessoa de
 ## Instale as dependências
   * `npm install`
 
+#### ⚠️ **Inicie seu `docker-compose` antes de testar localmente!** ⚠️
+- Utilize os scripts de apoio `npm run compose:up` / `npm run compose:down`, para facilitar a execução do seu *compose*.
+
 ## Executando teste:
 
 Para rodar testes de cobertura no back-end, utilize o comando: `cd app/backend && npm run test:coverage`
