@@ -16,8 +16,20 @@ A aplicação desenvolvida foi capaz de regerenciar a serie A do campeonato __TF
 
 Desenvolvido uma aplicação dockerizada em `Node.js + Typescript` usando o pacote `sequelize`.
 
-## Instale as dependências
+### Clone o reposítório
+ * `git clone git@github.com:michel-oliveira8/project-Trybe-Futebol-Clube.git`
+
+#### Entre na pasta do repositório que você acabou de clonar:
+ * `cd project-Trybe-Futebol-Clube`
+
+
+### Instale as dependências
   * `npm install`
+
+### Para rodar a aplicação:
+Front-end(realizado pela Trybe): `cd app/frontend && npm start`
+<br>
+Back-end: `cd app/backend && npm run dev`
 
 #### ⚠️ **Inicie seu `docker-compose` antes de testar localmente!** ⚠️
 - Utilize os scripts de apoio `npm run compose:up` / `npm run compose:down`, para facilitar a execução do seu *compose*.
