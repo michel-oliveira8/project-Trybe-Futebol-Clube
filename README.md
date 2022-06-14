@@ -1,6 +1,5 @@
 # Projeto realizado durante curso na Trybe - Módulo de Back-end
-
-# Habilidades
+## Projeto Trybe Futebol Clube
 
 ![Exemplo app front](./front-example.png)
 
@@ -10,7 +9,9 @@ Nesse projeto, foi contruído **um back-end dockerizado utilizando modelagem de 
 
 A aplicação desenvolvida foi capaz de regerenciar a serie A do campeonato __TFC - Trybe Futebol Clube__. Foram desenvolvidos alguns endpoints (seguindo os princípios **REST**) conectados ao banco de dados. Além disso, também foram aplicados os princípios **SOLID**!
 
----
+### Tecnologias:
+
+ - `JavaScript, TypeScript, NodeJS, Docker, MySQL, Sequelize, ORM, Mocha, Chai e Sinon`
 
 ## Desenvolvimento
 
